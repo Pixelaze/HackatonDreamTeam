@@ -38,7 +38,6 @@ def send_room_data(message):
             print(e)
             print(e.args)
             bot.reply_to(message, Enum.LOCALE['not_a_number_error'])
-            
 
 bot.polling(none_stop = True)
 
