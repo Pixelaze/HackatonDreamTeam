@@ -16,7 +16,7 @@ class JSONParser:
         print("JSONParser initialized")
     
     #Парсинг устройства
-    def parseMeasurement(self, json_responce):
+    def parsedevice(self, json_responce):
         propertyName = json_responce["property"]
         value = json_responce["value"]
         state = json_responce["state"]
@@ -27,12 +27,12 @@ class JSONParser:
     def parseRoom(self, json_responce):
         deviceId = json_responce[0]['deviceId']
         room = json_responce[0]['room']
-        measurements = []
+        devices = []
         for i in range(Enum.DEVICE_COUNT):
-            to_append = self.parseMeasurement(json_responce[0]['measurements'][i])
-            measurements.append(to_append)
+            to_append = self.parsedevice(json_responce[0]['measurements'][i])
+            devices.append(to_append)
 
-        return Room.Room(deviceId, room, measurements)
+        return Room.Room(deviceId, room, devices)
     
     #Парсинг локализации
     def parseLocale(self, locale_file_name):
@@ -45,10 +45,3 @@ class JSONParser:
 jsonParser = JSONParser()
 jsonParser.parseLocale(Enum.LOCALE_FILE_NAME)
 parser = Parser()
-
-if __name__ == '__main__':
-    json_string = parser.getRoom(1)
-    print(json_string)
-    print("\n--++--\n")
-    parsed = jsonParser.parseRoom(json_string)
-    print(parsed.getString())

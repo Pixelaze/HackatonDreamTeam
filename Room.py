@@ -3,10 +3,10 @@ import Enum
 
 #Комната
 class Room:
-    def __init__(self, deviceId, name, measurements):
+    def __init__(self, deviceId, name, devices):
         self.name = name
         self.deviceId = deviceId
-        self.measurements = measurements
+        self.devices = devices
 
     def getString(self):
         string = Enum.LOCALE['room_print_schema_parents'].replace("%NAME%", self.name)
@@ -18,3 +18,6 @@ class Measurment:
         self.propertyName = propertyName,
         self.value = value
         self.state = state
+    
+    def getString(self):
+        pass #TODO
