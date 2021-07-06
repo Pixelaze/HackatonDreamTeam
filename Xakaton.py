@@ -1,6 +1,7 @@
 import telebot
 import Enum
 import DataAnalyze
+import Room
 
 bot = telebot.TeleBot(Enum.TOKEN)
 
@@ -20,7 +21,24 @@ def send_room_list(message):
         reply = reply.replace("%NAME%", room['room'])
     bot.reply_to(message, reply)
 
-@bot.message_handler()
+@bot.message_handler(commands=['status', 'статус', 'Статус', 'Status'])
+def send_room_data(message):
+    message_splitted = message.text.split()
+    if(len(message_splitted) == 1):
+        bot.reply_to(message, "ЕРЖАН ВСТАВАЙ!!!!!!!")
+    else:
+        try:
+            room_id = int(message_splitted[1])
+            if(room_id <= 0 or room_id > Enum.ROOM_COUNT):
+                bot.reply_to(message, Enum.LOCALE['room_not_exists_error'])
+                return
+            reply = Room.getStringRoom(room_id - 1)
+            bot.reply_to(message, reply)
+        except Exception as e:
+            print(e)
+            print(e.args)
+            bot.reply_to(message, Enum.LOCALE['not_a_number_error'])
+            
 
 bot.polling(none_stop = True)
 
