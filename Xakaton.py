@@ -11,8 +11,6 @@ def get_text_messages(message):
         bot.send_message(message.from_user.id, '')
     elif message.text.lower() == 'Состояние класса [номер класса]':
         bot.send_message(message.from_user.id, '')
-    elif message.text.lower() == 'Состояние класса [номер класса]':
-        bot.send_message(message.from_user.id, '')
     else:
         bot.send_message(message.from_user.id, 'Не понимаю, что это значит.')
 bot.polling(none_stop=True)
