@@ -26,7 +26,33 @@ def send_room_list(message):
 def send_room_data(message):
     message_splitted = message.text.split()
     if(len(message_splitted) == 1):
-        bot.reply_to(message, "ЕРЖАН ВСТАВАЙ!!!!!!!")
+        status = 0
+        for i in range(Enum.ROOM_COUNT):
+            room_status = Enum.ROOMS[i][0]
+            room_status = Status.statusAnalyzer.analyzeRoom(room_status)[0]
+            if(room_status == Enum.Status.BEST):
+                status += 0
+            elif(room_status == Enum.Status.GOOD):
+                status += 1
+            elif(room_status == Enum.Status.MEDIUM):
+                status += 2
+            elif(room_status == Enum.Status.BAD):
+                status += 3
+            elif(room_status == Enum.Status.WORST):
+                status += 4
+        status = round(status / Enum.ROOM_COUNT)
+        if(status == 0):
+            status = Enum.Status.BEST
+        elif(status == 1):
+            status = Enum.Status.GOOD
+        elif(status == 2):
+            status = Enum.Status.MEDIUM
+        elif(status == 3):
+            status = Enum.Status.BAD
+        else:
+            status = Enum.Status.WORST
+        bot.reply_to(message, status)
+
     else:
         try:
             room_id = int(message_splitted[1])
