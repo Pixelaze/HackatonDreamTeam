@@ -1,5 +1,6 @@
 import Parser
 import Enum
+import Status
 
 #Комната
 class Room:
@@ -23,9 +24,12 @@ class Measurment:
 
 def getStringRoom(room_id):
     room = Enum.ROOMS[room_id][0]
-    print(room)
-    string = Enum.LOCALE['room_print_schema_parents'].replace("%NAME%", room["room"]).replace("%ID%", str(room_id))
+    status = Status.statusAnalyzer.analyzeRoom(room)
+    string = Enum.LOCALE['room_print_schema_parents'].replace("%NAME%", room["room"]).replace("%ID%", str(room_id)).replace("%STATUS%", str(status[0]))
     string += "\n" + getStringDevices(room_id, room)
+    string += "\n"
+    for i in range(len(status[2])):
+        string += status[2][i] + "\n"
     return string
 
 def getStringDevices(room_id, room):

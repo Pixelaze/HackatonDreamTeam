@@ -2,6 +2,7 @@ import telebot
 import Enum
 import DataAnalyze
 import Room
+import Status
 
 bot = telebot.TeleBot(Enum.TOKEN)
 
@@ -17,7 +18,7 @@ def send_room_list(message):
 
         reply += "\n" + Enum.LOCALE['room_list_print_schema_one']
         reply = reply.replace("%ROOM_NUMBER%", str(i + 1))
-        reply = reply.replace("%STATUS%", "ЕРЖАН НА МАКСИМЕ ВСТАВАЙ БЛЯТЬ")
+        reply = reply.replace("%STATUS%", Status.statusAnalyzer.analyzeRoom(room)[0])
         reply = reply.replace("%NAME%", room['room'])
     bot.reply_to(message, reply)
 

@@ -4,7 +4,17 @@ class StatusAnalyzer:
     def __init__(self):
         pass
 
-    def analyzeStatus(self, co2, temp, noise):
+    def analyzeRoom(self, room):
+        devices = room['measurements']
+        print(devices)
+        print(devices[0])
+        temp = devices[0]['value']
+        co2 = devices[2]['value']
+        noise = devices[4]['value']
+        hum = devices[1]['value']
+        return self.analyzeStatus(co2, temp, noise, hum)
+
+    def analyzeStatus(self, co2, temp, noise, hum):
         co2rank = (co2 - 1200) / 30
         if (co2rank < 0):
             co2rank = 0
@@ -20,15 +30,15 @@ class StatusAnalyzer:
         rank = 100 - co2rank - noiserank - humrank - temprank
 
         if (rank >= 90):
-            return Enum.STATUS.BEST, rank, self.getRecomendations(co2, temp, noise)
+            return Enum.Status.BEST, rank, self.getRecomendations(co2, temp, noise)
         elif (rank >= 70):
-            return Enum.STATUS.GOOD, rank, self.getRecomendations(co2, temp, noise)
+            return Enum.Status.GOOD, rank, self.getRecomendations(co2, temp, noise)
         elif (rank >= 50):
-            return Enum.STATUS.MEDIUM, rank, self.getRecomendations(co2, temp, noise)
+            return Enum.Status.MEDIUM, rank, self.getRecomendations(co2, temp, noise)
         elif (rank >= 20):
-            return Enum.STATUS.BAD, rank, self.getRecomendations(co2, temp, noise)
+            return Enum.Status.BAD, rank, self.getRecomendations(co2, temp, noise)
         else:
-            return Enum.STATUS.WORST, rank, self.getRecomendations(co2, temp, noise)
+            return Enum.Status.WORST, rank, self.getRecomendations(co2, temp, noise)
     
     def getRecomendations(self, co2, temp, noise):
         returning = ""
@@ -48,3 +58,5 @@ class StatusAnalyzer:
             returning += Enum.LOCALE['really_big_noise'] + "\n"
         
         return returning
+
+statusAnalyzer = StatusAnalyzer()
