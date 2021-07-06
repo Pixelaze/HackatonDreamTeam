@@ -16,5 +16,5 @@
     "room_list_print_schema": "Cписок комнат: ",
     "room_list_print_schema_one": "%ROOM_NUMBER% - \t%STATUS% - \t%NAME%",
 
-    "help_list": "Список команд:\n/help - список команд\n/status [ID] - информация о комнате\n/status - общий статус окружающей среды\n/rooms - список комнат\n/history - WIP\n/map - WIP"
+    "help_list": "Привет, я - бот. Я слежу за состоянием окружающей среды в лицее. Что вы хотите узнать?\nСписок команд:\n/help - список команд\n/status [ID] - информация о комнате\n/status - общий статус окружающей среды\n/rooms - список комнат\n/history - WIP\n/map - WIP"
 }
