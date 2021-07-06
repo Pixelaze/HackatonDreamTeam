@@ -9,4 +9,6 @@
 
     "room_print_schema_parents": "Название комнаты: %NAME%\nСписок датчиков: ",
     "room_print_schema_admins": "ID комнаты: {self.deviceId}\nНазвание комнаты: {self.name}\nСписок датчиков: "
+    "class_print_schema_parents": "Cписок: Название комнаты: %NAME%\nСписок датчиков: "
+    "class_print_schema_admins": "Cписок: Название комнаты: {self.name} + ID комнаты: \nСписок датчиков: "
 }
