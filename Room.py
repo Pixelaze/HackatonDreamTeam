@@ -8,7 +8,11 @@ class Room:
         self.deviceId = deviceId
         self.measurements = measurements
 
-#Датчик
+    def getString(self):
+        string = Enum.LOCALE['room_print_schema_parents'].replace("%NAME%", self.name)
+        return string
+
+#Устройство
 class Measurment:
     def __init__(self, propertyName, value, state):
         self.propertyName = propertyName,

@@ -5,5 +5,8 @@
     "pressure": "Давление",
     "noise": "Шум",
     "tvoc": "Твок",
-    "battery": "Аккумулятор"
+    "battery": "Аккумулятор",
+
+    "room_print_schema_parents": "Название комнаты: %NAME%\nСписок датчиков: ",
+    "room_print_schema_admins": "ID комнаты: {self.deviceId}\nНазвание комнаты: {self.name}\nСписок датчиков: "
 }
