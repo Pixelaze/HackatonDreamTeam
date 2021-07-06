@@ -1,20 +1,10 @@
+import Parser
+import Enum
+
 class DataAnalyzer:
-    def __init__():
-        pass #TODO
+    def __init__(self):
+        print("DataAnalyzer initialized")
 
-    def sendRoomsArray(self, rooms):
-        pass #TODO
+    def getRoomsArray(self):
+        Parser.
 
-class Room:
-    def __init__(self, status):
-        pass #TODO
-
-class Status:
-    BEST = 0
-    GOOD = 1
-    MEDIUM = 2
-    BAD = 3
-    WORST = 4
-
-class Map:
-    pass #TODO

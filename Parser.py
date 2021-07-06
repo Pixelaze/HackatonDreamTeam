@@ -1,8 +1,12 @@
 import requests
+import Room
 
-class Parser:
+class Parser: #TODO
     def __init__(self):
-        pass #TODO
+        print("Parser initialized")
 
-    def giveData(self, response):
-        pass #TODO
+    def getRoomsArray(self):
+        #TODO: Переместить с случайных данных на парсинг
+        rooms = [1]
+
+parser = Parser()
