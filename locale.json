@@ -9,8 +9,12 @@
 
     "room_print_schema_parents": "Название комнаты: %NAME%\nСписок датчиков: ",
     "room_print_schema_admins": "ID комнаты: {self.deviceId}\nНазвание комнаты: {self.name}\nСписок датчиков: ",
+
+    "device_print_schema_parents": "\t%PROPERTY% - \t%VALUE%",
+    "device_print_schema_admins": "\t%PROPERTY% - \t%VALUE% - \t%STATE%",
+
     "room_list_print_schema": "Cписок комнат: ",
-    "room_list_print_schema_one": "%ROOM_NUMBER% - %STATUS%",
+    "room_list_print_schema_one": "%ROOM_NUMBER% - \t%STATUS% - \t%NAME%",
 
     "help_list": "Список команд:\n/help - список команд\n/status [ID] - информация о комнате\n/status - общий статус окружающей среды\n/rooms - список комнат\n/history - WIP\n/map - WIP"
 }

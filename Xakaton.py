@@ -1,11 +1,26 @@
 import telebot
 import Enum
+import DataAnalyze
 
 bot = telebot.TeleBot(Enum.TOKEN)
 
-@bot.message_handler(commands=['help', 'Помощь', 'помощь'])
+@bot.message_handler(commands=['help', 'Помощь', 'помощь', 'Help'])
 def send_help(message):
     bot.reply_to(message, Enum.LOCALE['help_list'])
+
+@bot.message_handler(commands=['rooms', 'комнаты', 'Комнаты', 'Rooms'])
+def send_room_list(message):
+    reply = Enum.LOCALE['room_list_print_schema']
+    for i in range(Enum.ROOM_COUNT):
+        room = Enum.ROOMS[i][0]
+
+        reply += "\n" + Enum.LOCALE['room_list_print_schema_one']
+        reply = reply.replace("%ROOM_NUMBER%", str(i + 1))
+        reply = reply.replace("%STATUS%", "ЕРЖАН НА МАКСИМЕ ВСТАВАЙ БЛЯТЬ")
+        reply = reply.replace("%NAME%", room['room'])
+    bot.reply_to(message, reply)
+
+@bot.message_handler()
 
 bot.polling(none_stop = True)
 

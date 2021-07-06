@@ -9,8 +9,7 @@ class Room:
         self.devices = devices
 
     def getString(self):
-        string = Enum.LOCALE['room_print_schema_parents'].replace("%NAME%", self.name)
-        return string
+        
 
 #Устройство
 class Measurment:
@@ -20,4 +19,10 @@ class Measurment:
         self.state = state
     
     def getString(self):
-        pass #TODO
+        pass
+
+def getStringRoom(room_id):
+    string = Enum.LOCALE['room_print_schema_parents'].replace("%NAME%", self.name)
+    return string
+
+def getStringDevices(room_id)

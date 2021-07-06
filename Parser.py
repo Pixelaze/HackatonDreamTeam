@@ -37,7 +37,7 @@ class JSONParser:
     #Парсинг локализации
     def parseLocale(self, locale_file_name):
         result = ""
-        with open(locale_file_name) as f:
+        with open(locale_file_name, "r", encoding='utf-8') as f:
             result = json.load(f)
         print("Locale parsed")
         Enum.LOCALE = result
