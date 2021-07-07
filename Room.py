@@ -28,8 +28,7 @@ def getStringRoom(room_id):
     string = Enum.LOCALE['room_print_schema_parents'].replace("%NAME%", room["room"]).replace("%ID%", str(room_id)).replace("%STATUS%", str(status[0]))
     string += "\n" + getStringDevices(room_id, room)
     string += "\n"
-    for i in range(len(status[2])):
-        string += status[2][i] + "\n"
+    string += status[2]
     return string
 
 def getStringDevices(room_id, room):

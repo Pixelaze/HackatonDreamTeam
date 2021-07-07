@@ -9,9 +9,6 @@ bot = telebot.TeleBot(Enum.TOKEN)
 
 @bot.message_handler(commands=['help', 'Помощь', 'помощь', 'Help'])
 def send_help(message):
-    keyboard = types.InlineKeyboardMarkup()
-    callback_button = types.InlineKeyboardButton(text="Список комнат", callback_data="test")
-    keyboard.add(callback_button)
     bot.reply_to(message, Enum.LOCALE['help_list'], reply_markup = keyboard)
 
 @bot.message_handler(commands=['rooms', 'комнаты', 'Комнаты', 'Rooms'])
@@ -63,7 +60,10 @@ def send_room_data(message):
                 bot.reply_to(message, Enum.LOCALE['room_not_exists_error'])
                 return
             reply = Room.getStringRoom(room_id - 1)
-            bot.reply_to(message, reply)
+            keyboard = types.InlineKeyboardMarkup()
+            callback_button = types.InlineKeyboardButton(text="Список комнат", callback_data="rooms")
+            keyboard.add(callback_button)
+            bot.reply_to(message, reply, reply_markup = keyboard)
         except Exception as e:
             print(e)
             print(e.args)
@@ -72,7 +72,7 @@ def send_room_data(message):
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
     if call.message:
-        if call.data == "test":
+        if call.data == "rooms":
             send_room_list(call.message)
 
 bot.polling(none_stop = True)
