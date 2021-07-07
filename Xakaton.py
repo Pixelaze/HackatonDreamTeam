@@ -3,12 +3,16 @@ import Enum
 import DataAnalyze
 import Room
 import Status
+from telebot import types
 
 bot = telebot.TeleBot(Enum.TOKEN)
 
 @bot.message_handler(commands=['help', 'Помощь', 'помощь', 'Help'])
 def send_help(message):
-    bot.reply_to(message, Enum.LOCALE['help_list'])
+    keyboard = types.InlineKeyboardMarkup()
+    callback_button = types.InlineKeyboardButton(text="Список комнат", callback_data="test")
+    keyboard.add(callback_button)
+    bot.reply_to(message, Enum.LOCALE['help_list'], reply_markup = keyboard)
 
 @bot.message_handler(commands=['rooms', 'комнаты', 'Комнаты', 'Rooms'])
 def send_room_list(message):
@@ -52,7 +56,6 @@ def send_room_data(message):
         else:
             status = Enum.Status.WORST
         bot.reply_to(message, status)
-
     else:
         try:
             room_id = int(message_splitted[1])
@@ -66,21 +69,10 @@ def send_room_data(message):
             print(e.args)
             bot.reply_to(message, Enum.LOCALE['not_a_number_error'])
 
-bot.polling(none_stop = True)
+@bot.callback_query_handler(func=lambda call: True)
+def callback_inline(call):
+    if call.message:
+        if call.data == "test":
+            send_room_list(call.message)
 
-"""
-@bot.message_handler(commands=['Начать'])
-def send_welcome(message):
-    bot.reply_to(message, f'Я - бот. Я слежу за состоянием окружающей среды в классах. Приятно познакомиться, {message.from_user.first_name}. Что вы хотите узнать?')
-@bot.message_handler(content_types=['text'])
-def get_text_messages(message):
-    if message.text.lower() == 'список помещений.':
-        bot.send_message(message.from_user.id, '')
-    elif message.text.lower() == 'карта этажа [номер этажа]':
-        bot.send_message(message.from_user.id, '')
-    elif message.text.lower() == 'состояние класса [номер класса]':
-        bot.send_message(message.from_user.id, '')
-    else:
-        bot.send_message(message.from_user.id, 'Не понимаю, что это значит.')
-bot.polling(none_stop=True)
-"""
+bot.polling(none_stop = True)
