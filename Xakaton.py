@@ -9,7 +9,7 @@ bot = telebot.TeleBot(Enum.TOKEN)
 
 @bot.message_handler(commands=['help', 'Помощь', 'помощь', 'Help'])
 def send_help(message):
-    bot.reply_to(message, Enum.LOCALE['help_list'], reply_markup = keyboard)
+    bot.reply_to(message, Enum.LOCALE['help_list'])
 
 @bot.message_handler(commands=['rooms', 'комнаты', 'Комнаты', 'Rooms'])
 def send_room_list(message):
